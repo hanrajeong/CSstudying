@@ -19,7 +19,7 @@ int linear_search(person* players, int len, int id) {
 int binary_search(person* players, int len, int id) {
   int start = 0, end = len-1, mid;
   while (start<=end) {
-   printf("[%d, %d]\n", start, end); // debugging
+//    printf("[%d, %d]\n", start, end); // debugging
     mid = (start+end)/2;
     if (id==players[mid].ID)
       return mid;
