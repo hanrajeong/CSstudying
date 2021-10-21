@@ -12,17 +12,18 @@ bool is_palindrome(const char* str)
   {
     count++;
   }
-  char *st = (char*)malloc(count*sizeof(char));
-  strcpy(st, str);
+
+  char *s = (char*)malloc(count*sizeof(char));
+  strcpy(s, str);
 
   if(count <= 1)
   {
     return true;
   }
-  if(st[0] == st[count])
+  if(s[0] == s[count])
   {
-    st[count] = '\0';
-    return is_palindrome(st+1);
+    s[count] = '\0';
+    return is_palindrome(s+1);
   }
   else
     return false;
