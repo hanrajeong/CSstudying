@@ -6,95 +6,74 @@
 
 // Q1
 int square_cube(int a, int b) {
-  // implement me
-  // if a>b, function returns a^3 + b^2
-  // let's put the return value as the result, and let it be integer, since the result will be only int.
   int result = 0;
-
   if(a > b)
   {
     result = a*a*a + b*b;
   }
-  // otherwise, function returns a^2 + b^3
   else
   {
     result = a*a + b*b*b;
   }
-
   return result;
 }
 
 
 // Q2
 void rotate3(int* a,int* b,int* c) {
-  // implement me
-  int temp = *b;
+  int temp;
+  temp = *a;
+  *a = *b;
   *b = *c;
-  *c = *a;
-  *a = temp;
+  *c = temp;
 }
 
 
 // Q3
 int digits_to_zero(char* str) {
-  // implement me
-  // let's define integer count in order to return the number of digits in the string
-  // we will looking through the given string like the array,
-  // the index value is defined as i and it will be rotate from start to the end with 'for'
-  // but it will end when it meets the end of the string, which is in C++, '\0'
-  int i = 0;
+  int len = strlen(str);
   int count = 0;
-
-  for(; str[i]!='\0'; i++)
+  for (int i = 0; i < len; i++)
   {
-    if(str[i] >= '0' && str[i] <= '9')
+    if(str[i] == '1' || str[i] == '2' || str[i] == '3' || str[i] == '4' || str[i] == '5' || str[i] == '6' || str[i] == '7' || str[i] == '8' || str[i] == '9')
     {
       count++;
-      //After counting the digit of the string,
-      //Let's change it with 0 as the question asked
       str[i] = '0';
     }
+    else if(str[i] == '0')
+    {
+      count++;
+    }
   }
-  printf("%s", *str);
   return count;
 }
 
 
 // Q4
 int max_abs(const int* arr, int len) {
-  // implement me
-  // define integer i
-  // define max_num which will be stored with the maximum absolute value of given array
-
-  int i;
-  int max_num = 0;
-
-  // Let's see the value stored in each index
-  for(i = 0; i < len; i++)
+  int max = arr[0];
+  for (int i = 1; i < len; i++)
   {
-    // if the value stored in the index is positive and bigger than the max_num, 
-    //it will automatically stored in max_num
-    if(arr[i] > max_num) 
+    if(arr[i]<0)
     {
-      max_num = arr[i];
+      if(max < (-1)*arr[i])
+      {
+        max = (-1)*arr[i];
+      }
     }
-    // otherwise, if the value of the index is negative, but have the bigger absolute value than the max_num,
-    // it will automatically stored in max_num with the absolute value with the following code
-    else if((-1) * arr[i] > max_num)
+    else if(max < arr[i])
     {
-      max_num = (-1) * arr[i];
+      max = arr[i];
     }
   }
-  return max_num;
+  return max;
 }
+
+
 
 void str_subtract_one(char* num) {
   
   int len = strlen(num);
-
-  // We will find from the end to the front, where there is digit that is not zero
-  // After finding the index of this first non-zero digit, the digits which located at the front of the non-zero digit,
-  // will not change, and the rest of the digit from the non-zero digit will change.
 
   int first_nonzero = len;
 
