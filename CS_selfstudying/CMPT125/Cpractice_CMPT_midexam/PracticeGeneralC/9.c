@@ -21,18 +21,29 @@
 //   }
 // }
 
+// void reverse(char str[])
+// {
+//   int len = strlen(str);
+//   char s[len];
+//   for(int i = 0; i <len; i++)
+//   {
+//     s[i] = str[len - i -1];
+//   }
+//   s[len] = '\0';
+//   for(int j = 0; j < len; j++)
+//   {
+//     str[j] = s[j];
+//   }
+// }
 void reverse(char str[])
 {
   int len = strlen(str);
-  char s[len];
-  for(int i = 0; i <len; i++)
+  char temp;
+  for(int i = 0; i <len/2; i++)
   {
-    s[i] = str[len - i -1];
-  }
-  s[len] = '\0';
-  for(int j = 0; j < len; j++)
-  {
-    str[j] = s[j];
+    temp = str[i];
+    str[i] = str[len-i-1];
+    str[len-i-1] = temp;
   }
 }
 

@@ -16,7 +16,7 @@ int max(const int array[], int n)
 
 int main(void)
 {
-  int array[] = {1, 2, 3, 4, 5, 6, 7};
+  int array[] = {21, 2, 3, 4, 5, 6, 7};
   int n = 7;
 
   printf("%d", max(array, n));

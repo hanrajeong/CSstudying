@@ -127,33 +127,29 @@ unsigned long fib3(unsigned int n) {
 
 int linear_search_rec_first(int* ar, int length, int number) {
   int index;
-  if(ar[0] == number)
+  if(length <= 0)
   {
-    return 0;
-  }
-  if(length == 1)
-  {
-    if(ar[0] == number)
-    {
-      return 0;
-    }
-    else
-    {
-      return -1;
-    }
+    return -1;
   }
   else
   {
-    index = linear_search_rec_first(ar+1, length-1, number);
-    if(index != -1)
+    if(arr[0] == number)
     {
-      return index + 1;
+      index = 0;
     }
     else
     {
-      return -1;
+      index = linear_search_rec_first(ar+1, length-1, number);
+      if(index != -1)
+      {
+        return index + 1;
+      }
+      else
+      {
+        return -1;
+      }
     }
-  }  
+  }
 }
 
 int linear_search_rec_last(int* ar, int length, int number) {

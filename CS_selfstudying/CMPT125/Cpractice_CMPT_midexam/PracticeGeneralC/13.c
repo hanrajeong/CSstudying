@@ -46,6 +46,22 @@ int binary_to_int(const char* binary)
   return result;
 }
 
+// int binary_to_int(const char* binary)
+// {
+//   int two = 1;
+//   int num = 0;
+//   int len = strlen(binary);
+//   for(int i = 0; i <len; i++)
+//   {
+//     if(binary[i] == '1')
+//     {
+//       num = num+two;
+//     }
+//     two = two*2;
+//   }
+//   return num;
+// }
+
 int main(void)
 {
   char *binary = "11011";

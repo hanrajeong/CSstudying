@@ -2,15 +2,9 @@
 
 int main(void)
 {
-  int arr[5] = {10, 1, 2, 3, 4};
-  int *ptr;
+  const char c = 'a';
 
-  ptr = arr;
+  char* ptr_char = &c;
 
-  for(int i = 0; i < 5; i++)
-  {
-    printf("%p, %d\n", (ptr+i), *(ptr+i));
-  }
-
-  return 0;
+  printf("%c", *ptr_char);
 }

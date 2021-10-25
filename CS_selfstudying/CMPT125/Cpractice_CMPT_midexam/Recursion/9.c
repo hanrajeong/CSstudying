@@ -29,23 +29,44 @@
 //     return false;
 // }
 
-bool is_palindrome(const char* str)
+// bool is_palindrome(const char* str)
+// {
+//   int len = strlen(str);
+//   int h = len/2;
+//   for(int i = 0; i < h; i++)
+//   {
+//     if(str[i] != str[len-i-1])
+//     {
+//       return false;
+//     }
+//   }
+//   return true;
+// }
+
+bool is_palindrome(const char* s)
 {
-  int len = strlen(str);
-  int h = len/2;
-  for(int i = 0; i < h; i++)
+  int len = strlen(s);
+  char* str = (char*)malloc(len*sizeof(char));
+  strcpy(str, s);
+  if(len <= 1)
   {
-    if(str[i] != str[len-i-1])
-    {
-      return false;
-    }
+    return true;
   }
-  return true;
+  if(str[0]!=str[len-1])
+  {
+    return false;
+  }
+  else
+  {
+    str[len-1] = '\0';
+    return is_palindrome(str+1);
+  }
+  return false;
 }
 
 int main(void)
 {
-  char str[] = "rae car";
+  char str[] = "racecarq";
   char *ptr = str;
 
   printf(is_palindrome(ptr) ? "true" : "false");

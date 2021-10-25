@@ -145,10 +145,7 @@ unsigned long fib3(unsigned int n) {
 }
 
 int linear_search_rec_first(int* ar, int length, int number) {
-  // implement me
-  
   int result;
-  // checking whether the moved pointer, which pointing to the new array's first element is equal to the searching number.
   if(ar[0] == number)
   {
     return 0;
@@ -166,12 +163,7 @@ int linear_search_rec_first(int* ar, int length, int number) {
   }
   else
   {
-    // this part is for recursion
-    // finding the index by moving the pointer one index backward and then moving the length one step forward
     result = linear_search_rec_first(ar + 1, length - 1, number);
-    // if the result is equal to -1, it means it fails to find the given number
-    // if not so, just adding 1 everytime during recursion, so make it to follow the index
-    // otherwise, just return -1 and finish.
     if(result != -1) 
     {
       return result + 1;

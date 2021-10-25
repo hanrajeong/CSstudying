@@ -1,88 +1,70 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void merge(int* arr, int start, int mid, int end)
+void merge(int* A, int n, int mid)
 {
-  int length = end - start + 1;
-  int *sorted_arr = malloc(length * sizeof(int));
+  int *arr = (int*)malloc(n*sizeof(int));
+  int i =0;
+  int j = mid;
   int k = 0;
-  int i = start;
-  int j = mid + 1;
 
-  while(i <= mid && j <=end)
+  while(i <= mid-1 && j <= n-1)
   {
-    if(arr[i] <= arr[j])
+    if(A[i] < A[j])
     {
-      sorted_arr[k] = arr[i];
+      arr[k] = A[i];
       k++;
       i++;
     }
     else
     {
-      sorted_arr[k] = arr[j];
+      arr[k] = A[j];
       k++;
       j++;
     }
   }
-  while(i<=mid)
+  while(i<=(mid-1))
   {
-    sorted_arr[k] = arr[i];
+    arr[k] = A[i];
+    k++;
     i++;
   }
-  while(j<=end)
+  while(j<=(n-1))
   {
-    sorted_arr[k] = arr[j];
+    arr[k] = A[j];
+    k++;
     j++;
   }
-
-  for(int p = 0; p < length; p++)
+  for(int p = 0; p < n; p++)
   {
-    arr[start+p] = sorted_arr[k];
-    k++;
+    A[p] =arr[p];
   }
+  free(arr);
 }
-
-
-void mergesort(int* arr, int start, int end)
+void merge_sort(int* A, int n) 
 {
-  if(start < end)
+  if (n >= 2) 
   {
-    int mid = (start + end) / 2;
-    mergesort(arr, start, mid);
-    mergesort(arr, mid+1, end);
-    merge(arr, start, mid, end);
+    int mid = n/2;
+    merge_sort(A, mid);
+    merge_sort(A+mid, n-mid);
+    merge(A,n,mid);
   }
-  
 }
-
-
 
 int main(void)
 {
-  int n = 0;
-  printf("please type the length of array you want to sort ");
-  scanf("%d", &n);
-
-  int *arr = (int*)malloc(n*sizeof(int));
-  printf("please type the array : ");
-  for(int i = 0; i < n; i++)
+  int A[10] = {9, 8, 7, 6, 5, 4, 3, 2, 1, 0};
+  for(int i = 0; i <10; i++)
   {
-    scanf("%d", &arr[i]);
+    printf("%d ", A[i]);
   }
-
-  for(int i = 0; i < n; i++)
-  {
-    printf("%d ", arr[i]);
-  }
-
   printf("\n");
-
-  mergesort(arr, 0, n-1);
-
-  for(int i = 0; i < n; i++)
+  printf("\n");
+  merge_sort(A, 10);
+  for(int i = 0; i <10; i++)
   {
-    printf("%d ", arr[i]);
+    printf("%d ", A[i]);
   }
 
-  return 0;
 }
