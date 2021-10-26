@@ -41,11 +41,18 @@ int longest_incr_subsequence(const int arr[], int n)
     {
       count++;
     }
-    else if(count > max)
+    else 
+    { 
+      if(count > max)
       {
       max = count;
       count = 1;
       }
+      else
+      {
+        count = 1;
+      }
+    }
     
   }
   return max;
@@ -53,9 +60,9 @@ int longest_incr_subsequence(const int arr[], int n)
 
 int main(void)
 {
-  int arr[10] = {1, 2, 6, 4, 3, 8, 9, 10, 2, 4};
+  int arr[12] = {1, 2, 6, 4, 3, 8, 9, 0, 11, 12, 14, 0};
 
-  printf("%d", longest_incr_subsequence(arr, 10));
+  printf("%d", longest_incr_subsequence(arr, 12));
 
   return 0;
 }

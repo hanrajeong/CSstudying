@@ -16,39 +16,40 @@ int linear_search_rec_first(int* ar, int length, int number)
     result = linear_search_rec_first(ar + 1, length - 1, number);
     if(result != -1) 
     {
-      return result + 1;
+      result = result + 1;
     }
     else
     {
       return -1;
     }
   }
+  return result;
 }
 
 
-int linear_search_rec_last(int *ar, int length, int number)
-{
-  if(length<=0)
-  {
-    return -1;
-  }
-  if(ar[length-1] == number)
-  {
-    return length-1;
-  }
-  else
-  {
-    return linear_search_rec_last(ar, length-1, number);
-  }
-  return -1;
-}
+// int linear_search_rec_last(int *ar, int length, int number)
+// {
+//   if(length<=0)
+//   {
+//     return -1;
+//   }
+//   if(ar[length-1] == number)
+//   {
+//     return length-1;
+//   }
+//   else
+//   {
+//     return linear_search_rec_last(ar, length-1, number);
+//   }
+//   return -1;
+// }
 
 int main(void)
 {
   int A[10] = {1, 5, 3, 4, 5, 6, 7, 8, 9, 10};
-  int d1 = linear_search_rec_first(A, 10, 10);
-  int d2 = linear_search_rec_last(A, 10, 9);
-  printf("%d", d2);
+  int d1 = linear_search_rec_first(A, 10, 1);
+  // int d2 = linear_search_rec_last(A, 10, 9);
+  printf("%d", d1);
 
 }
 
