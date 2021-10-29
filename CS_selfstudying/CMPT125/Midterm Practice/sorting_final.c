@@ -25,40 +25,132 @@ void swap(int *x, int *y) {
 }
 
 //quick sort
-void quick_sort(int* arr, int n, int pivot_idx)
+// void quick_sort(int* arr, int n, int pivot_idx)
+// {
+//   if(n<=1)
+//   {
+//     return;
+//   }
+//   int pivot = arr[pivot_idx];
+//   int temp = arr[0];
+//   arr[0] = arr[pivot_idx];
+//   arr[pivot_idx] = temp;
+//   int left = 1;
+//   int right = n-1;
+//   while(left <= right)
+//   {
+//     while(arr[left] < pivot)
+//     {
+//       left++;
+//     }
+//     while(arr[right] > pivot)
+//     {
+//       right--;
+//     }
+//     if(left <= right)
+//     {
+//       temp=arr[left];
+//       arr[left] = arr[right];
+//       arr[right] = temp;
+//     }
+//   }
+//   temp = arr[right];
+//   arr[right] = arr[0];
+//   arr[0] = temp;
+//   quick_sort(arr, right, 0);
+//   quick_sort(arr+right+1, n-right-1, 0);
+// }
+int middle(int* A, int right)
 {
+  int left = 0;
+  int mid = (left + right) / 2;
+
+  if(A[left] > A[mid])
+  {
+    if(A[mid] > A[right])
+    {
+      return mid;
+    }
+    else
+    {
+      if(A[left] > A[right])
+      {
+        return right;
+      }
+      else
+      {
+        return left;
+      }
+    }
+  }
+  else
+  {
+    if(A[left] > A[right])
+    {
+      return left;
+    }
+    else
+    {
+      if(A[mid] > A[right])
+      {
+        return right;
+      }
+      else
+      {
+        return mid;
+      }
+    }
+  }
+}
+
+
+void quick_sort(int* A, int n) {
   if(n<=1)
   {
     return;
   }
-  int pivot = arr[pivot_idx];
-  int temp = arr[0];
-  arr[0] = arr[pivot_idx];
-  arr[pivot_idx] = temp;
+  if(n==2)
+  {
+    if(A[0] <= A[1])
+    {
+      return;
+    }
+    else
+    {
+      int t = A[0];
+      A[0] = A[1];
+      A[1] = t;
+    }
+  }
+  int pivot_idx = middle(A, n-1);
+  int pivot = A[pivot_idx];
+  int temp = A[0];
+  A[0] = A[pivot_idx];
+  A[pivot_idx] = temp;
   int left = 1;
   int right = n-1;
   while(left <= right)
   {
-    while(arr[left] < pivot)
+    while(A[left] < pivot)
     {
       left++;
     }
-    while(arr[right] > pivot)
+    while(A[right] > pivot)
     {
       right--;
     }
     if(left <= right)
     {
-      temp=arr[left];
-      arr[left] = arr[right];
-      arr[right] = temp;
+      temp=A[left];
+      A[left] = A[right];
+      A[right] = temp;
     }
   }
-  temp = arr[right];
-  arr[right] = arr[0];
-  arr[0] = temp;
-  quick_sort(arr, right, 0);
-  quick_sort(arr+right+1, n-right-1, 0);
+  temp = A[right];
+  A[right] = A[0];
+  A[0] = temp;
+  quick_sort(A, right);
+  quick_sort(A+right+1, n-right-1);
 }
 
 void quick_sort2(int* ar, int n)
@@ -191,9 +283,9 @@ void check_sorted(int* ar, int n) {
   int i;
 
   // check that the array is sorted  
-  for (i=1; i<LENGTH; i++) {
+  for (i=0; i<LENGTH; i++) {
     printf("%d ", ar[i]);
-    if (ar[i-1]>ar[i])
+    if (ar[i]>ar[i+1])
       printf("WRONG");
   }
   printf("done checking...\n");
@@ -262,7 +354,7 @@ int main() {
   printf("\n");
 
   printf("quick sort on array of length %d...\n", LENGTH);
-  quick_sort(ar6, LENGTH, 2);
+  quick_sort(ar6, LENGTH);
   printf("checking quick sort...\n");
   check_sorted(ar6, LENGTH);
   printf("\n");

@@ -102,7 +102,7 @@ void test_q2()  {
 }
 
 // used for test Q3-find
-bool is_even(int x) { return x%2; }
+bool is_even(int x) { return x%2 == 0; }
 bool is_positive(int x) { return x>0; }
 
 void test_q3_find()  {

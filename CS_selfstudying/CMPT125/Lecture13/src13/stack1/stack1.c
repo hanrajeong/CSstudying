@@ -26,10 +26,15 @@ stack_t* stack_create()
 // Q: what happens when more than MAX_SIZE elements are added?
 void stack_push(stack_t* s, int item)
 {
-    (s->ar)[s->head] = item;
-    (s->head)++;
+    (s->ar)[s->head] = item; // 여기서 pointer인 head는 가장 마지막에 넣은 last element의 다음 위치를 가르키고 있음.
+    (s->head)++; // 따라서 push를 하는 경우 pointer의 위치를 옮겨야함.
 }
-
+//예를 들어
+//[1, 2, 3]
+//         ^
+//push(4)
+//[1, 2, 3, 4]
+//            ^ 
 // pops the top element from the stack
 // Pre condition: stack is not empty
 // Q: why do we need a pointer to s?
@@ -44,9 +49,9 @@ int stack_pop(stack_t* s)
     //        |
     //        v
     // [1,2,3,4,0,0,0,0,0]
-    (s->head)--;
-    //      |
-    //      v
+    (s->head)--; // move head down by one, and return that value, head의 위치가 가장 마지막 element의 다음 위치를 가르키고
+    //      | 있었으니까, 한칸 앞으로 당겨서 head --로, 포인팅하는 element를 반환하고, 그 자리가 비었다고 생각하는 것.
+    //      v 실제로 값을 없애거나 하는 것은 아니고 pointer가지고 노는 것.
     // [1,2,3,4,0,0,0,0,0]
 
     return (s->ar)[s->head];
