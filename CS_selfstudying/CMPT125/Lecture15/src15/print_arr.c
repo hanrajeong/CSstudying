@@ -12,7 +12,8 @@ void bad_recursion_static(int* str, int n) {
   }
 }
 
-void print_rec(int* str, int n) {
+void print_rec(int* str, int n) { // it is adding the elements to the stack every time, so n-1 more elements
+// actually using more memory?
   if(n>=1) 
   {
     printf("%d ", str[0]);
