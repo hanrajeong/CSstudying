@@ -1,4 +1,4 @@
-#ifndef LL_H
+LL#ifndef LL_H
 #define LL_H
 
 struct node {

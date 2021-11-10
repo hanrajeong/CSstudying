@@ -23,6 +23,169 @@ void swap(int *x, int *y) {
     *x = *y;
     *y = tmp;
 }
+
+//quick sort
+// void quick_sort(int* arr, int n, int pivot_idx)
+// {
+//   if(n<=1)
+//   {
+//     return;
+//   }
+//   int pivot = arr[pivot_idx];
+//   int temp = arr[0];
+//   arr[0] = arr[pivot_idx];
+//   arr[pivot_idx] = temp;
+//   int left = 1;
+//   int right = n-1;
+//   while(left <= right)
+//   {
+//     while(arr[left] < pivot)
+//     {
+//       left++;
+//     }
+//     while(arr[right] > pivot)
+//     {
+//       right--;
+//     }
+//     if(left <= right)
+//     {
+//       temp=arr[left];
+//       arr[left] = arr[right];
+//       arr[right] = temp;
+//     }
+//   }
+//   temp = arr[right];
+//   arr[right] = arr[0];
+//   arr[0] = temp;
+//   quick_sort(arr, right, 0);
+//   quick_sort(arr+right+1, n-right-1, 0);
+// }
+int middle(int* A, int right)
+{
+  int left = 0;
+  int mid = (left + right) / 2;
+
+  if(A[left] > A[mid])
+  {
+    if(A[mid] > A[right])
+    {
+      return mid;
+    }
+    else
+    {
+      if(A[left] > A[right])
+      {
+        return right;
+      }
+      else
+      {
+        return left;
+      }
+    }
+  }
+  else
+  {
+    if(A[left] > A[right])
+    {
+      return left;
+    }
+    else
+    {
+      if(A[mid] > A[right])
+      {
+        return right;
+      }
+      else
+      {
+        return mid;
+      }
+    }
+  }
+}
+
+
+void quick_sort(int* A, int n) {
+  if(n<=1)
+  {
+    return;
+  }
+  if(n==2)
+  {
+    if(A[0] <= A[1])
+    {
+      return;
+    }
+    else
+    {
+      int t = A[0];
+      A[0] = A[1];
+      A[1] = t;
+    }
+  }
+  int pivot_idx = middle(A, n-1);
+  int pivot = A[pivot_idx];
+  int temp = A[0];
+  A[0] = A[pivot_idx];
+  A[pivot_idx] = temp;
+  int left = 1;
+  int right = n-1;
+  while(left <= right)
+  {
+    while(A[left] < pivot)
+    {
+      left++;
+    }
+    while(A[right] > pivot)
+    {
+      right--;
+    }
+    if(left <= right)
+    {
+      temp=A[left];
+      A[left] = A[right];
+      A[right] = temp;
+    }
+  }
+  temp = A[right];
+  A[right] = A[0];
+  A[0] = temp;
+  quick_sort(A, right);
+  quick_sort(A+right+1, n-right-1);
+}
+
+void quick_sort2(int* ar, int n)
+{
+  if(n<=1)
+  {
+    return;
+  }
+  int left = 1;
+  int right = n-1;
+  int pivot = ar[0];
+  int temp;
+  while(left <= right)
+  {
+    while(ar[left] < pivot)
+    {
+      left++;
+    }
+    while(ar[right] > pivot)
+    {
+      right--;
+    }
+    if(left < right)
+    {
+      temp = ar[left];
+      ar[left] = ar[right];
+      ar[right] = temp;
+    }
+  }
+  temp = ar[right];
+  ar[right] = ar[0];
+  ar[0] = temp;
+  quick_sort2(ar, right);
+  quick_sort2(ar+right+1, n-right-1);
+}
  
 // selection sort
 void selection_sort(int* arr, int n) {
@@ -43,20 +206,18 @@ void selection_sort(int* arr, int n) {
 
 void insertion_sort(int *arr, int n) 
 { 
-  int i, key, j; 
-  for (i = 1; i < n; i++) 
-  { 
-    key = arr[i]; 
-    j = i-1; 
-    while (j >= 0 && arr[j] > key) 
-    { 
-      arr[j+1] = arr[j]; 
-      j = j-1; 
-    } 
-    arr[j+1] = key; 
-  } 
+  for(int i = 1; i < n; i++)
+  {
+    int j = i-1;
+    int key = arr[i];
+    while(j>=0 && arr[j]>key)
+    {
+      arr[j+1] = arr[j];
+      j--;
+    }
+    arr[j+1] = key;
+  }
 } 
- 
 
 void merge(int *A, int *L, int leftcount, int *R, int rightcount)
 {
@@ -122,9 +283,9 @@ void check_sorted(int* ar, int n) {
   int i;
 
   // check that the array is sorted  
-  for (i=1; i<LENGTH; i++) {
+  for (i=0; i<LENGTH; i++) {
     printf("%d ", ar[i]);
-    if (ar[i-1]>ar[i])
+    if (ar[i]>ar[i+1])
       printf("WRONG");
   }
   printf("done checking...\n");
@@ -146,6 +307,8 @@ int main() {
   int ar3[LENGTH];
   int ar4[LENGTH];
   int ar5[LENGTH];
+  int ar6[LENGTH];
+  int ar7[LENGTH];
 
   // create a random array
   set_rand(ar1, LENGTH);
@@ -154,9 +317,14 @@ int main() {
   memcpy(ar3, ar1, LENGTH*sizeof(int));
   memcpy(ar4, ar1, LENGTH*sizeof(int));
   memcpy(ar5, ar1, LENGTH*sizeof(int));
+  memcpy(ar6, ar1, LENGTH*sizeof(int));
+  memcpy(ar7, ar1, LENGTH*sizeof(int));
 
-  check_sorted(ar1, LENGTH);
-
+  for(int i = 0; i < LENGTH; i++)
+  {
+    printf("%d ", ar1[i]);
+  }
+  printf("\n");
 
 
   printf("insertion sort on array of length %d...\n", LENGTH);
@@ -185,7 +353,17 @@ int main() {
   check_sorted(ar4, LENGTH);
   printf("\n");
 
+  printf("quick sort on array of length %d...\n", LENGTH);
+  quick_sort(ar6, LENGTH);
+  printf("checking quick sort...\n");
+  check_sorted(ar6, LENGTH);
+  printf("\n");
 
+  printf("quick sort2 on array of length %d...\n", LENGTH);
+  quick_sort2(ar7, LENGTH);
+  printf("checking quick sort...\n");
+  check_sorted(ar7, LENGTH);
+  printf("\n");
 
   return 0;
-}	       
+}

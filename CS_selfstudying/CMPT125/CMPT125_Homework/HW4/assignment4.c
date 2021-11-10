@@ -78,9 +78,48 @@ char* stack_to_string(stack_t* s) {
   return res;
 }
 
+bool is_leaf(BTnode_t* root)
+{
+  return (root->left == NULL && root->right == NULL);
+}
+
+int size(BTnode_t* root)
+{
+  if(root==NULL)
+    return 0;
+  if(is_leaf(root))
+    return 1;
+  else
+    return size(root->left) + size(root->right) + 1;
+}
+
+int length(BTnode_t* root)
+{
+  int result;
+  char* temp;
+  if(root==PLUS || root==MULT || root==MINUS || root==DIV)
+    result = 1 + length(root->left) + length(root->right);
+  else
+  {
+    if(root->value > 99 && root->value < 1000)
+      result = 3 + length(root->left) + length(root->right);
+    else if(root->value <100 && root->value > 9)
+      result = 2 + length(root->left) + length(root->right);
+    else if(root->value < 10 && root->value >= 0)
+      result = 1 + length(root->left) + length(root->right);
+    else if(root->value > (-10) && root->value < 0)
+      result = 2 + length(root->left) + length(root->right);
+    else if(root->value > (-1000) && root->value < (-99))
+      result = 3 + length(root->left) + length(root->right);
+  }
+}
 
 char* get_arithmetic_expression(BTnode_t* expression) {
-  // implement me
+  if(expression = NULL)
+    return;
+  get_arithmetic_expression(expression->left);
+  printf("%d", expression->data);
+  get_arithmetic_expression(expression->right);
   return NULL;
 }
 

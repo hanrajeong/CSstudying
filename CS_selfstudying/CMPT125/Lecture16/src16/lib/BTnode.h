@@ -19,6 +19,10 @@ void set_left_child(BTnode_t* parent, BTnode_t* left_child);
 
 void set_right_child(BTnode_t* parent, BTnode_t* right_child);
 
+int size(BTnode_t* root);
+
+int height(BTnode_t* root);
+
 void print_pre_order(BTnode_t* root);
 
 void print_in_order(BTnode_t* root);
