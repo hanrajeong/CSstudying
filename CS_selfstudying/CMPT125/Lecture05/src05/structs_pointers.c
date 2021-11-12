@@ -21,8 +21,8 @@ int main()
     printf("Name: %s %s\nID = %d\n",
         clark.first_name,
         (*student_ptr).last_name,
-        // student_ptr->id);
-        (*student_ptr).id);
+        student_ptr->id);
+        // (*student_ptr).id);
 
     return 0;
 }

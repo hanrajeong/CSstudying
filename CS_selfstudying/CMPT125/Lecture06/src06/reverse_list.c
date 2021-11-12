@@ -8,7 +8,7 @@ int main() {
   printf("Enter the size of the array\n");
   scanf("%d", &n);
 
-  int* arr = (int*) malloc (n * sizeof(int));
+  char* arr = (char*) malloc (n * sizeof(char));
   if (arr == NULL)
   {
     printf("memory allocation failed\n");
@@ -17,13 +17,13 @@ int main() {
   
   printf("Enter the %d numbers\n", n);
   for (int i  = 0; i < n; i++)
-    scanf("%d", &arr[i]);
+    scanf("%s", &arr[i]);
 
  
   printf("The list in reverse order:\n");
   for (int i = n-1; i >=0; i--)
   {
-    printf("%4d ", arr[i]);
+    printf("%c ", arr[i]);
   }
   printf("\n");
 

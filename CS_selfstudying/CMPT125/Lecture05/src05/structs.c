@@ -32,7 +32,6 @@ int main()
 
     printf("address of the pointer to first_name is %p\n",  &(list_of_students[0].first_name)); // address of the pointer
 
-
     printf("address of list_of_students[0].first_name is %p\n",  list_of_students[0].first_name); // address of the string 
 
     printf("address of the pointer to last_name is %p\n",  &(list_of_students[0].last_name)); // address of the pointer

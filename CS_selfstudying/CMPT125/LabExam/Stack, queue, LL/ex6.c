@@ -18,6 +18,13 @@ typedef struct {
   LL_t* list;
 } stack_t;
 
+typedef struct BTnode {
+  int value;
+  struct BTnode* left;
+  struct BTnode* right;
+  struct BTnode* parent;
+} BTnode_t;
+
 LL_t* LL_create()
 {
   LL_t* l = (LL_t*)malloc(sizeof(LL_t));

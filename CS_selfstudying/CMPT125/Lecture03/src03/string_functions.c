@@ -78,6 +78,8 @@ int main()
 
     str_cpy(b, a);
 
+    printf("%d\n", str_cmp(a, b));
+
     if (a == b)
       printf("a == b\n");
     else

@@ -13,8 +13,8 @@
 int main()
 {
 
-    whole_number n = 10; // same as int n = 10;
-    printf("%d\n", n);
+    // whole_number n = 100; // same as int n = 10;
+    // printf("%d\n", n);
 
 
     // enum emphasis var = italic; // the type is 'enum emphasis'

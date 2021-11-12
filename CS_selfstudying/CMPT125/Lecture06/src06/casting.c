@@ -26,7 +26,7 @@ int main() {
 
 /* casting pointers */
   
-  i = 10;
+  i = 127;
   int* ptr1 = &i;
   char* ptr2 = (char*) ptr1;  // explicit casting
   // 이부분에서 ptr1은 int에 pointer 중이었는데, 이제 char로 포인트하게 바꾼 것.

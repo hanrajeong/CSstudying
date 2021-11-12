@@ -14,5 +14,13 @@ int* get_array_of_squares_of_length_10() {
   {
     ret[i] = i*i;
   }
+  for(int i=0; i<10; i++)
+    printf("%d ",ret[i]);
   return ret;
+}
+
+int main(void)
+{
+  int* ar = get_array_of_squares_of_length_10();
+
 }

@@ -19,10 +19,11 @@ void print_2d_array(int height, int width, int array[height][width])
 
 int main()
 {
-    int a[3][4] = {
+    int a[4][4] = {
         {0, 1, 2, 3} ,   //  initializers for 0 row
         {4, 5, 6, 7} ,   //  initializers for 1 row
-        {8, 9, 10, 11}   //  initializers for 2 row
+        {8, 9, 10, 11},
+        {8, 9, 10, 11}    //  initializers for 2 row
     };
 
 
@@ -39,8 +40,8 @@ int main()
 
     printf("size of *a = %ld\n", sizeof(*a));
 
-    printf("%p\n", b);
-    printf("%p\n", *(b+1));
+    printf("%d\n", b);
+    printf("%d\n", *(b+1));
     printf("%d\n", *(*(b+1)+1));
 
 // more subtelties
