@@ -1,45 +1,42 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
-#define MAXSIZE 10
+#define maxsize 10
 
-typedef struct{
+typedef struct {
+  int* ar;
   int head;
   int tail;
-  int* ar;
 } queue_t;
-
-int queue_is_empty(queue_t* q);
-
 
 queue_t* create_queue()
 {
   queue_t* q = (queue_t*)malloc(sizeof(queue_t));
-  if(q == NULL)
-  {
+  if(q==NULL)
     return NULL;
-  }
-  q->ar = (int*)malloc(MAXSIZE*sizeof(int));
+  q->ar = (int*)malloc((maxsize)*sizeof(int));
   if(q->ar == NULL)
-  {
     return NULL;
-  }
   q->head = 0;
   q->tail = 0;
 
   return q;
 }
 
+int queue_is_empty(queue_t* q)
+{
+  return (q->head == q->tail);
+}
+
 int enqueue(queue_t* q, int item)
 {
-  if(((q->tail)+1)%MAXSIZE == q->head)
+  if(((q->tail)+1)%maxsize == q->head)
   {
-    printf("queue is full");
     return -1;
   }
-  (q->ar)[q->tail] = item;
-  q->tail = ++(q->tail) % MAXSIZE;
-  // printf("head is %d tail is %d \n", q->head, q->tail);
+  q->ar[q->tail] = item;
+  (q->tail) = ((q->tail)+1)%maxsize;
 
   return item;
 }
@@ -47,25 +44,11 @@ int enqueue(queue_t* q, int item)
 int dequeue(queue_t* q)
 {
   if(queue_is_empty(q))
-  {
-    printf("queue is empty");
     return -1;
-  }
+  int ret = q->ar[q->head];
+  q->head = ((q->head)+1)%maxsize;
 
-  int re = (q->ar)[q->head];
-  q->head = --(q->head)%MAXSIZE;
-
-  // printf("head is %d tail is %d \n", q->head, q->tail);
-
-  return re;
-}
-
-int queue_is_empty(queue_t* q)
-{
-  if(q->head == q->tail)
-    return 1;
-  else
-    return 0;
+  return ret;
 }
 
 void queue_free(queue_t* q)
@@ -73,6 +56,7 @@ void queue_free(queue_t* q)
   free(q->ar);
   free(q);
 }
+
 
 int main()
 {

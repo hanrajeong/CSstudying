@@ -8,8 +8,8 @@ int binary_search_rec_helper(int* A, int start, int end, int item) {
   
   int mid = (start+end)/2;
 
-  if (DEBUG_TEST)
-    printf("DEBUG: start=%d, mid = %d, end=%d\n", start,mid,end);
+  // if (DEBUG_TEST)
+  //   printf("DEBUG: start=%d, mid = %d, end=%d\n", start,mid,end);
   
   if (item == A[mid])
     return mid;
@@ -34,12 +34,12 @@ int binary_search_rec2(int* A, int n, int item) {
   int mid = n/2;
 
 
-  if (DEBUG_TEST) {
-    printf("DEBUG: ");
-    for (int i=0; i < n; i++)
-      printf("%d ", A[i]);
-    printf("\n mid = %d\n", mid);
-  }
+  // if (DEBUG_TEST) {
+  //   printf("DEBUG: ");
+  //   for (int i=0; i < n; i++)
+  //     printf("%d ", A[i]);
+  //   printf("\n mid = %d\n", mid);
+  // }
 
   // another stopping conditions
   if (A[mid]==item)

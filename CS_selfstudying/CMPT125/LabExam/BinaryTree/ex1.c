@@ -352,67 +352,66 @@ queue_t* same_depth_element(BTnode_t* root, int d)
   return q;
 }
 
-// queue_t* all_inorder(int* n, int size)
-// {
-//   queue_t* q = create_queue();
-//   for(int i = 0; i < size; i++)
-//   {
-//     queue_t* leftsub = all_inorder(n, i);
-//     queue_t* rightsub = all_inorder(n+i+1, size-i-1);
-//     node_t* curl = leftsub->list->head;
-//     node_t* curr = rightsub->list->head;
-//     while(curl!=NULL)
-//     {
-//       while(curr!=NULL)
-//       {
-//         BTnode_t* root = (BTnode_t*)malloc(sizeof(BTnode_t));
-//         root->value = n[i];
-//         set_left_child(root, leftsub->list->head);
-//         set_right_child(root, rightsub->list->head);
-//         enqueue(q, root);
-//       }
-//     }
-//   }
-//   return q;
-// }
+queue_t* all_inorder(int* n, int size)
+{
+  queue_t* q = create_queue();
+  for(int i = 0; i < size; i++)
+  {
+    queue_t* leftsub = all_inorder(n, i);
+    queue_t* rightsub = all_inorder(n+i+1, size-i-1);
+    node_t* curl = leftsub->list->head;
+    node_t* curr = rightsub->list->head;
+    while(curl!=NULL)
+    {
+      while(curr!=NULL)
+      {
+        BTnode_t* root = (BTnode_t*)malloc(sizeof(BTnode_t));
+        root->value = n[i];
+        set_left_child(root, (BTnode_t*)leftsub->list->head);
+        set_right_child(root, (BTnode_t*)rightsub->list->head);
+        enqueue(q, root);
+      }
+    }
+  }
+  return q;
+}
 
 bool same_inorder(BTnode_t* b1, BTnode_t* b2)
 {
   if(b1->value != b2->value)
     return false;
-  queue_t* q1 = create_queue();
+  queue_t* q1 = create_queue(); // create two queues
   queue_t* q2 = create_queue();
-  enqueue(q1, b1);
+  enqueue(q1, b1); // put the root
   enqueue(q2, b2);
   while(!queue_is_empty(q1) && !queue_is_empty(q2))
   {
-    BTnode_t* temp1 = dequeue(q1);
+    BTnode_t* temp1 = dequeue(q1); // get the node by dequeue
     BTnode_t* temp2 = dequeue(q2);
     if(temp1->left != NULL && temp2->left != NULL && temp1->left->value == temp2->left->value)
+    // if there are left child of the node and if they are same, just continue searching the other node
     {
-      printf("here1");
       enqueue(q1, temp1->left);
       enqueue(q2, temp2->left);
     }
     else if(temp1->left == NULL && temp2->left == NULL)
+    // if there are no left child for both, just continue
     {
-      printf("here2");
       continue;
     }
-    else
+    else // If their left children are not NULL but different, then just return false and end the code
       return false;
     if(temp2->right != NULL && temp2->right != NULL && temp1->right->value == temp2->right->value)
     {
-      printf("here3");
+      // if there are right child of the node and if they are same, continue searching the other node
       enqueue(q1, temp1->right);
       enqueue(q2, temp2->right);
     }
-    else if(temp1->right == NULL && temp2->right == NULL)
+    else if(temp1->right == NULL && temp2->right == NULL) // If their right child are both NULL just continue;
     {
-      printf("here4");
       continue;
     }
-    else
+    else // If their right children are not NULL but different, then just return false and end the code
       return false;
   }
   return true;
@@ -497,7 +496,14 @@ int main(void) {
   printf("\n");
   // printf(same_inorder(n1, new) ? "true" : "false");
   // printf("\n");
-  BFS(new);
+  // BFS(new);
+  int ar[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+  queue_t* answer = all_inorder(ar, 10);
+  while(!queue_is_empty(answer))
+  {
+    queue_t* temp = dequeue(answer);
+    LL_print(temp->list);
+  }
 
   // int a[7] = {4, 2, 5, 1, 6, 3, 7};
   // BTnode_t* new2 = inorder_list(a, 7);
