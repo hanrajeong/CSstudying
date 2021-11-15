@@ -60,6 +60,55 @@ void stack_free(stack_t* s)
   free(s);
 }
 
+void print_stack(stack_t* s)
+{
+  for(int i = 0; i < s->head; i++)
+    printf("%d ", s->ar[i]);
+  printf("\n");
+}
+
+stack_t* copy_stack(stack_t* s)
+{
+  stack_t* new = stack_create();
+  for(int i = 0; i < s->head; i++)
+  {
+    stack_push(new, s->ar[i]);
+  }
+  return new;
+}
+
+bool equal_stack(stack_t* s1, stack_t* s2)
+{
+  if(s1->head != s2->head)
+    return false;
+  for(int i = 0; i < s1->head; i++)
+  {
+    if(s1->ar[i] != s2->ar[i])
+      return false;
+  }
+  return true;
+}
+
+void reverse_stack(stack_t* s)
+{
+  for(int i = 0; i < (s->head / 2); i++)
+  {
+    int temp = s->ar[i];
+    s->ar[i] = s->ar[s->head - i - 1];
+    s->ar[s->head - i - 1] = temp;
+  }
+}
+
+stack_t* reverse_stack2(stack_t* s)
+{
+  stack_t* new = stack_create();
+  for(int i = 0; i < (s->head); i++)
+  {
+    stack_push(new,s->ar[(s->head)-i-1]);
+  }
+  return new;
+}
+
 
 int main()
 {
@@ -79,35 +128,15 @@ int main()
   printf("stack push(%d)\n", 4);
   stack_push(s, 4); // s = [1,2,3,4]
 
-  printf("stack pop = %d\n", stack_pop(s));  // s = [1,2,3] print 4
-
-  printf("stack push(%d)\n", 5);
-  stack_push(s, 5); // s = [1,2,3,5]
-
-  printf("stack pop = %d\n", stack_pop(s));  // s = [1,2,3] print 5
-
-  printf("stack push(%d)\n", 6);
-  stack_push(s, 6); // s = [1,2,3,6]
-
-
-  printf("stack pop = %d\n", stack_pop(s)); // s = [1,2,3] print 6
-  printf("stack pop = %d\n", stack_pop(s)); // s = [1,2] print 3
-  printf("stack pop = %d\n", stack_pop(s)); // s = [1] print 2
-
-
-  if (stack_is_empty(s))
-    printf("Stack is empty\n");
-  else
-    printf("Stack is not empty\n");
-
-  printf("stack pop = %d\n", stack_pop(s)); // s = [] print 1
-
-
-
-  if (stack_is_empty(s))
-    printf("Stack is empty\n");
-  else
-    printf("Stack is not empty\n");
+  print_stack(s);
+  stack_t* s1 = copy_stack(s);
+  print_stack(s1);
+  printf(equal_stack(s, s1) ? "true" : "false");
+  printf("\n");
+  reverse_stack(s1);
+  print_stack(s1);
+  stack_t* s3 = reverse_stack2(s);
+  print_stack(s3);
 
   stack_free(s);
 }
